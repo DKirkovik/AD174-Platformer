@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovment : MonoBehaviour
 {
@@ -76,5 +77,19 @@ public class PlayerMovment : MonoBehaviour
             rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         }
         rb.velocity = new Vector2(velocity.x * speed,rb.velocity.y);
+    }
+
+    void OnCollisionEnter2D(Collision2D other) 
+    {
+        if(other.gameObject.tag =="Food"){
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+
+        }
+        if (other.gameObject.tag == "Enemy")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        }
+        
     }
 }
