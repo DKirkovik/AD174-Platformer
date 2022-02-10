@@ -15,6 +15,7 @@ public class PlayerMovment : MonoBehaviour
     private Vector2 velocity;
     public LayerMask ground;
     private float speed;
+    private bool isGrounded = false;
 
 
 
@@ -52,10 +53,15 @@ public class PlayerMovment : MonoBehaviour
         }
 
 
+        RaycastHit2D ray = Physics2D.CircleCast(new Vector2(transform.position.x, transform.position.y), 0.5f, Vector2.down, 0.5f, ground);
 
-
-        if (Physics2D.CircleCast(new Vector2(transform.position.x,transform.position.y),1f,Vector2.down,1f, ground)){
-            Debug.Log("Hit");
+        if (ray){
+            Debug.Log("Grounded");
+            isGrounded = true;
+        }
+        else{
+            Debug.Log("not Grounded");
+            isGrounded = false;
         }
 
 
@@ -64,7 +70,7 @@ public class PlayerMovment : MonoBehaviour
 
     void ProcMovment()
     {
-        if (Input.GetButton("Jump"))
+        if (Input.GetButton("Jump") && isGrounded)
         {
             Debug.Log("Jumping");
             rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
