@@ -54,7 +54,7 @@ public class PlayerMovment : MonoBehaviour
         }
 
 
-        RaycastHit2D ray = Physics2D.CircleCast(new Vector2(transform.position.x, transform.position.y), 0.5f, Vector2.down, 0.5f, ground);
+        RaycastHit2D ray = Physics2D.CircleCast(new Vector2(transform.position.x, transform.position.y), 1f, Vector2.down, 1f, ground);
 
         if (ray){
             Debug.Log("Grounded");
